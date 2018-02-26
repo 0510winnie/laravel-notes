@@ -9,22 +9,19 @@ class ArticleController extends Controller
 {
     public function index()
     {
-   		$articles = Article::latest()->get();
+        $articles = Article::latest()->paginate(10);
+        $count = Article::count();
 
-   		return view('articles.index', compact('articles'));
+   		return view('articles.index', compact('articles', 'count'));
     }
 
-    public function show($id)
+    public function show(Article $article)
     {
-   		$article = Article::find($id);
-
    		return view('articles.show', compact('article'));
     }
 
-    public function edit($id)
+    public function edit(Article $article)
     {
-    	$article = Article::find($id);
-
     	return view('articles.edit', compact('article'));
     }
 
@@ -37,29 +34,22 @@ class ArticleController extends Controller
     {
     	$data = $request->all();
 
-    	$article = new Article;
-    	$article->title = $data['title'];
-    	$article->content = $data['content'];
+    	$article = new Article($data);
     	$article->save();
 
     	return redirect()->route('articles.index');
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Article $article)
     {
         $data = $request->all();
-
-        $article = Article::find($id);
-        $article->title = $data['title'];
-        $article->content = $data['content'];
-        $article->save();
+        $article->update($data);
 
         return redirect()->route('articles.index');
     }
 
-    public function destroy($id)
+    public function destroy(Article $article)
     {
-        $article = Article::find($id);
         $article->delete();
 
         return redirect()->route('articles.index');
