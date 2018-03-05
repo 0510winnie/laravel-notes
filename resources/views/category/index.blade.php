@@ -6,7 +6,8 @@
 		<div class="row">
 			<div class="col-md-6 offset-md-3">
 
-				<h3>Total Aritlces Count: {{ $count }} </h3>
+				<h1>Viewing Category: {{ $category->name }}</h1>
+
 				@foreach($articles as $article)
 				<article class="card my-3">
 					<div class="card-body">
@@ -30,9 +31,6 @@
 				</article>
 				@endforeach
 
-				<div>
-					{{ $articles->links() }}
-				</div>
 			</div>
 		</div>
 	</div>

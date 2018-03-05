@@ -22,9 +22,18 @@ $factory->define(App\User::class, function (Faker $faker) {
     ];
 });
 
+$factory->define(App\ArticleCategory::class, function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+    ];
+});
+
 $factory->define(App\Article::class, function (Faker $faker) {
 	return [
 		'title' => $faker->name,
-		'content' => $faker->text
+		'content' => $faker->text,
+        'category_id' => function () {
+            return factory(App\ArticleCategory::class)->create()->id;
+        }
 	];
 });
