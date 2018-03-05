@@ -30,14 +30,17 @@ class ArticleController extends Controller
     public function create()
     {
         $categories = ArticleCategory::all();
-    	return view('articles.create');
+        $article = new Article();
+    	return view('articles.create', compact('article'));
     }
 
     public function store(Request $request)
     {
-    	$data = $request->all();
+        $data = $request->all();
 
-    	$article = new Article($data);
+        $category = ArticleCategory::find($data['category_id']);
+        $article = new Article($data);
+        $article->category()->associate($category);
     	$article->save();
 
     	return redirect()->route('articles.index');
@@ -46,6 +49,8 @@ class ArticleController extends Controller
     public function update(Request $request, Article $article)
     {
         $data = $request->all();
+        $category = ArticleCategory::find($data['category_id']);
+        $article->category()->associate($category);
         $article->update($data);
 
         return redirect()->route('articles.index');

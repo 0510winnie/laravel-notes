@@ -22,6 +22,13 @@ $factory->define(App\User::class, function (Faker $faker) {
     ];
 });
 
+$factory->define(App\Tag::class, function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+    ];
+});
+
+
 $factory->define(App\ArticleCategory::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
@@ -34,6 +41,9 @@ $factory->define(App\Article::class, function (Faker $faker) {
 		'content' => $faker->text,
         'category_id' => function () {
             return factory(App\ArticleCategory::class)->create()->id;
+        },
+        "user_id" => function () {
+            return factory(App\User::class)->create()->id;
         }
 	];
 });

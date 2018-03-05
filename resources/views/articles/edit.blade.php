@@ -14,15 +14,7 @@
 							<input type="hidden" name="_method" value="PATCH">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-							<div class="form-group">
-								<label for="title">Title:</label>
-								<input type="text" class="form-control" name="title" value="{{ $article->title }}">
-							</div>
-
-							<div class="form-group">
-								<label for="content">Content:</label>
-								<textarea class="form-control" name="content">{{ $article->content }}</textarea>
-							</div>
+							@include('articles.form')
 
 							<div class="form-group text-right">
 								<input type="submit" value="Update" class="btn btn-primary">

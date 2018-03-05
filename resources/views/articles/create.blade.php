@@ -12,16 +12,8 @@
 						<form action="{{ route('articles.store') }}" method="POST">
 							
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-							<div class="form-group">
-								<label for="title">Title:</label>
-								<input type="text" class="form-control" name="title">
-							</div>
-
-							<div class="form-group">
-								<label for="content">Content:</label>
-								<textarea class="form-control" name="content"></textarea>
-							</div>
+							
+							@include('articles.form')
 
 							<div class="form-group text-right">
 								<input type="submit" value="Create" class="btn btn-primary">
