@@ -3,23 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Article;
 
 class HomeController extends Controller
 {
-    public function index()
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-    	$articles = Article::all();
-
- 		return view('articles', [
- 			'articles' => $articles
- 		]);
+        $this->middleware('auth');
     }
 
-    public function path($id)
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-    	return view('path', [
-    		'id' => $id
-    	]);
+        return view('home');
     }
 }

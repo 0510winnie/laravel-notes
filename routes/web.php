@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', 'ArticleController@index')->name('home');
+Route::get('/my-articles', 'ArticleController@my');
+
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/articles', 'ArticleController@index')->name('articles.index');
 Route::get('/articles/create', 'ArticleController@create')->name('articles.create');
 Route::get('/articles/{article}', 'ArticleController@show')->name('articles.show');
@@ -23,3 +25,6 @@ Route::patch('/articles/{article}', 'ArticleController@update')->name('articles.
 Route::delete('/articles/{article}', 'ArticleController@destroy')->name('articles.destroy');
 
 Route::get('/category/{category}', 'CategoryController@index')->name('category.index');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

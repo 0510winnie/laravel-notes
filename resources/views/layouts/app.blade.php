@@ -36,14 +36,25 @@
 				@endforeach
 	        </div>
 	      </li>
+				@if (Auth::check())
 	      <li class="nav-item">
 	        <a class="nav-link" href="{{ route('articles.create') }}">Create Article</a>
 	      </li>
+				<li class="nav-item">
+					<a class="nav-link" href="/my-articles">My Articles</a>
+				</li>			
+				@else
+				<li class="nav-item">
+					<a class="nav-link" href="/login">Login</a>
+				</li>				
+				@endif
 	    </ul>
-	    <form class="form-inline my-2 my-lg-0">
-	      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-	      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			@if (Auth::check())
+	    <form class="form-inline my-2 my-lg-0" action="{{ route('logout') }}" method="POST"> 
+				@csrf
+	      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
 	    </form>
+			@endif
 	  </div>
 	</nav>
 
